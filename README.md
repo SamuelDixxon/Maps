@@ -7,5 +7,5 @@ https://centerforspatialresearch.github.io/methods-in-spatial-research-sp2022/
 https://realpython.com/python-web-applications/
 
 
-Here is NYC Central Gargen
+Here is one satellite image obtained of NYC Central Park
 ![alt text](https://github.com/SamuelDixxon/Maps/blob/master/1_13.png)
