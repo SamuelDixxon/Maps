@@ -6,4 +6,4 @@ https://centerforspatialresearch.github.io/methods-in-spatial-research-sp2022/
 
 https://realpython.com/python-web-applications/
 
-![alt text]1_13.png
+![alt text]https://github.com/SamuelDixxon/Maps/blob/master/1_13.png
