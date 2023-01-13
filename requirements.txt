@@ -1,0 +1,58 @@
+Flask==2.1.2
+
+from flask import Flask
+from flask import request
+import os
+import openai
+import requests
+from dotenv import dotenv_values
+import query.py
+
+app = Flask(__name__)
+
+
+@app.route("/")
+def index():
+    celsius = request.args.get("celsius", "")
+    # populate the api key from openai
+    # edit the .env file with your key to avoid hardcoding the value
+
+    return ("""<center><form action="" method="get">
+                <input type="text" value="latitude" name="x">
+                <input type="text" value="longitude" name="y">
+                <input type="submit" value="Get Picture">
+              </form><center>""" + celsius)
+
+
+@ app.route("/<int:celsius>")
+def fahrenheit_from(celsius):
+    """Convert Celsius to Fahrenheit degrees."""
+    fahrenheit = float(celsius) * 9 / 5 + 32
+    fahrenheit = round(fahrenheit, 3)  # Round to three decimal places
+
+    openai.api_key = dotenv_values(".env")['pass']
+    response = openai.Completion.create(
+        model="text-davinci-003",
+        prompt="Give me a word and definition to expand my vocabulary",
+        temperature=0.7,
+        max_tokens=256,
+        top_p=1,
+        frequency_penalty=0,
+        presence_penalty=0
+    )
+
+    key = "1fpA5Ae6C36w1M1TPgGBwi1VwfDVjAoeIZkbaU9C"
+
+    # accessing the part of the response we want
+    sentence = response["choices"][0]["text"]
+    # getting the value of the coordinates in array form
+    print(sentence)
+
+    # example = requests.get(f"https://api.nasa.gov/planetary/earth/assets?lon=-{lon}&lat={lat}&date=2020-03-01&&dim=0.10&api_key={key}")
+    # print(example.text)
+
+    return str(sentence)
+
+
+if __name__ == "__main__":
+    app.run(host="127.0.0.1", port=8080, debug=True)
